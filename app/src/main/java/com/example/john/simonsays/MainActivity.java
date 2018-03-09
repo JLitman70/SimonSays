@@ -8,20 +8,20 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class MenuActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_menu);
+        //setContentView(R.layout.activity_menu);
         final SoundPool.Builder soundbuilder = new SoundPool.Builder();
         final SoundPool sounds = soundbuilder.build();
         final int beepId = sounds.load(this, R.raw.beep,1);
-        final ImageView blue = (ImageView) findViewById(R.id.imageview_blue);
-        final ImageView green = (ImageView) findViewById(R.id.imageview_green);
-        final ImageView red = (ImageView) findViewById(R.id.imageview_red);
-        final ImageView yellow = (ImageView) findViewById(R.id.imageview_yellow);
-
+        //final ImageView blue = (ImageView) findViewById(R.id.imageview_blue);
+        //final ImageView green = (ImageView) findViewById(R.id.imageview_green);
+        //final ImageView red = (ImageView) findViewById(R.id.imageview_red);
+        //final ImageView yellow = (ImageView) findViewById(R.id.imageview_yellow);
+        /*
         blue.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View arg0, MotionEvent arg1) {
@@ -106,7 +106,7 @@ public class MenuActivity extends AppCompatActivity {
             }
         });
 
-
+        */
 
     }
 }
