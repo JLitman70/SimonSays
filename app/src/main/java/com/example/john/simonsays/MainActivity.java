@@ -13,7 +13,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setContentView(R.layout.activity_menu);
+        setContentView(R.layout.activity_main);
         final SoundPool.Builder soundbuilder = new SoundPool.Builder();
         final SoundPool sounds = soundbuilder.build();
         final int beepId = sounds.load(this, R.raw.beep,1);
