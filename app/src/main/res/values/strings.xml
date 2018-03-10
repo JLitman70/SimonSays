@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">SimonSays</string>
+    <string name="gamemode_prompt">choose a gamemode</string>
+
+    <string-array name="gamemodes">
+        <item>Simon(Original)</item>
+        <item>Easy Simon</item>
+        <item>Hard Simon</item>
+        <item>Timed Simon</item>
+
+    </string-array>
 </resources>
