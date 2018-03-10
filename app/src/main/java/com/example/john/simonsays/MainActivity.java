@@ -8,9 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -26,6 +29,64 @@ public class MainActivity extends AppCompatActivity {
         final ImageView green = (ImageView) findViewById(R.id.imageview_green);
         final ImageView red = (ImageView) findViewById(R.id.imageview_red);
         final ImageView yellow = (ImageView) findViewById(R.id.imageview_yellow);
+        final MoveGenerator gen = new MoveGenerator();
+
+        //Testing purposes!!!!!!!!!!!!!!!!!!!!!!======================================
+        final TextView _testview = (TextView) findViewById(R.id.textview_moves);
+        final Button _testbtn = (Button) findViewById(R.id.button_test);
+
+        _testbtn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                gen.addToken();
+                _testview.setText(gen.token);
+                // Making the motion event objects
+                final MotionEvent motionEvent = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis()+100, MotionEvent.ACTION_DOWN, 0.0f, 0.0f, 0);
+                final MotionEvent motionEvent2 = MotionEvent.obtain(SystemClock.uptimeMillis(), SystemClock.uptimeMillis()+100, MotionEvent.ACTION_UP, 0.0f, 0.0f, 0);
+
+
+                for(int i=0;i<gen.token.length();i++) {
+                    int timehelp = i;
+                    final ImageView temp;
+                    if (gen.token.charAt(i) == 'R') {
+                        temp = red;
+                    } else if (gen.token.charAt(i) == 'G') {
+                        temp = green;
+                    } else if (gen.token.charAt(i) == 'B') {
+                        temp = blue;
+                    } else if (gen.token.charAt(i) == 'Y') {
+                        temp = yellow;
+                    } else {
+                        temp = null;
+                    }
+
+
+                    // dispatcing events on a delay
+                    new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            temp.dispatchTouchEvent(motionEvent);
+                            new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                @Override
+                                public void run() {
+                                    temp.dispatchTouchEvent(motionEvent2);
+                                }
+                            }, 700);
+
+
+                        }
+                    }, 1000*(timehelp+1));
+
+
+                }
+
+
+
+
+            }
+        });
+
+        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!======================================
 
         blue.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -38,31 +99,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                     case MotionEvent.ACTION_UP:{
                         blue.setImageResource(R.drawable.blue);
-                        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                        /*
-                        * Below is the code that simulates buttons being pressed, I needed a trigger,
-                         * so this was palced pn the blue button release a a proof of concept
-                        * */
-                        // Making the motion event objects
-                        long downTime = SystemClock.uptimeMillis();
-                        long eventTime = SystemClock.uptimeMillis() + 100;
-                        final MotionEvent motionEvent = MotionEvent.obtain(downTime, eventTime, MotionEvent.ACTION_DOWN, 0.0f, 0.0f, 0);
-                        final MotionEvent motionEvent2 = MotionEvent.obtain(downTime, eventTime, MotionEvent.ACTION_UP, 0.0f, 0.0f, 0);
 
-                        // dispatcing events on a delay
-                        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                red.dispatchTouchEvent(motionEvent);
-                                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        red.dispatchTouchEvent(motionEvent2);
-                                    }
-                                }, 700);
-                            }
-                        },1000);
-                        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 
                         break;
