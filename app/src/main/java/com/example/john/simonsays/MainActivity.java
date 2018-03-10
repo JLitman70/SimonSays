@@ -71,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
+        
         green.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View arg0, MotionEvent arg1) {
@@ -130,8 +130,5 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
-
-
-
     }
 }
