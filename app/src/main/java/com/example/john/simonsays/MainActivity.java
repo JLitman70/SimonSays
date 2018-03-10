@@ -1,57 +1,32 @@
 package com.example.john.simonsays;
 
 import android.media.SoundPool;
+import android.os.Handler;
+import android.os.Looper;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+
+
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main2);
+        setContentView(R.layout.activity_main);
         final SoundPool.Builder soundbuilder = new SoundPool.Builder();
         final SoundPool sounds = soundbuilder.build();
         final int beepId = sounds.load(this, R.raw.beep,1);
+        final ImageView blue = (ImageView) findViewById(R.id.imageview_blue);
+        final ImageView green = (ImageView) findViewById(R.id.imageview_green);
+        final ImageView red = (ImageView) findViewById(R.id.imageview_red);
+        final ImageView yellow = (ImageView) findViewById(R.id.imageview_yellow);
 
-        //--------------------------------------second layout code start------------------------
-        Button play = (Button)findViewById(R.id.play_button);
-        play.setOnClickListener(this);
-
-        Spinner gamemode = findViewById(R.id.gamemode_dropdown);
-        gamemode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                //String text = adapterView.getSelectedItem().toString();
-                //Log.i("GAMEMODE", text); testing value is appearing
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-                //String text = adapterView.getSelectedItem().toString();
-                //Log.i("GAMEMODE", text); testing value is appearing
-            }
-        });
-
-        //--------------------------------------second layout code finish----------------------
-
-
-
-        //final ImageView blue = (ImageView) findViewById(R.id.imageview_blue);
-        //final ImageView green = (ImageView) findViewById(R.id.imageview_green);
-        //final ImageView red = (ImageView) findViewById(R.id.imageview_red);
-        //final ImageView yellow = (ImageView) findViewById(R.id.imageview_yellow);
-        /*
         blue.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View arg0, MotionEvent arg1) {
@@ -59,11 +34,36 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case MotionEvent.ACTION_DOWN: {
                         blue.setImageResource(R.drawable.blue_pressed);
                         sounds.play(beepId,1.0f,1.0f,1,0,1.3f);
-                        //Toast.makeText(getApplicationContext(),"Hello Javatpoint",Toast.LENGTH_SHORT).show();
                         break;
                     }
                     case MotionEvent.ACTION_UP:{
                         blue.setImageResource(R.drawable.blue);
+                        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        /*
+                        * Below is the code that simulates buttons being pressed, I needed a trigger,
+                         * so this was palced pn the blue button release a a proof of concept
+                        * */
+                        // Making the motion event objects
+                        long downTime = SystemClock.uptimeMillis();
+                        long eventTime = SystemClock.uptimeMillis() + 100;
+                        final MotionEvent motionEvent = MotionEvent.obtain(downTime, eventTime, MotionEvent.ACTION_DOWN, 0.0f, 0.0f, 0);
+                        final MotionEvent motionEvent2 = MotionEvent.obtain(downTime, eventTime, MotionEvent.ACTION_UP, 0.0f, 0.0f, 0);
+
+                        // dispatcing events on a delay
+                        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                red.dispatchTouchEvent(motionEvent);
+                                new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        red.dispatchTouchEvent(motionEvent2);
+                                    }
+                                }, 700);
+                            }
+                        },1000);
+                        //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 
                         break;
                     }
@@ -79,8 +79,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case MotionEvent.ACTION_DOWN: {
                         green.setImageResource(R.drawable.green_pressed);
                         sounds.play(beepId,1.0f,1.0f,1,0,1.2f);
-
-                        // Toast.makeText(getApplicationContext(),"Hello Javatpoint",Toast.LENGTH_SHORT).show();
                         break;
                     }
                     case MotionEvent.ACTION_UP:{
@@ -101,8 +99,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                         red.setImageResource(R.drawable.red_pressed);
                         sounds.play(beepId,1.0f,1.0f,1,0,1.1f);
-
-                        //Toast.makeText(getApplicationContext(),"Hello Javatpoint",Toast.LENGTH_SHORT).show();
                         break;
                     }
                     case MotionEvent.ACTION_UP:{
@@ -122,10 +118,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     case MotionEvent.ACTION_DOWN: {
                         yellow.setImageResource(R.drawable.yellow_pressed);
                         sounds.play(beepId,1.0f,1.0f,1,0,1.0f);
-
-                        //Toast.makeText(getApplicationContext(),"Hello Javatpoint",Toast.LENGTH_SHORT).show();
-                        break;
+                         break;
                     }
+
                     case MotionEvent.ACTION_UP:{
                         yellow.setImageResource(R.drawable.yellow);
 
@@ -136,18 +131,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        */
 
-    }
 
-    @Override
-    public void onClick(View view) {
-
-    }
-
-    public boolean onCreateOptionsMenu(Menu menu){
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return true;
     }
 }
