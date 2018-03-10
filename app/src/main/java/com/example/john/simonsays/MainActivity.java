@@ -17,10 +17,10 @@ public class MainActivity extends AppCompatActivity {
         final SoundPool.Builder soundbuilder = new SoundPool.Builder();
         final SoundPool sounds = soundbuilder.build();
         final int beepId = sounds.load(this, R.raw.beep,1);
-        //final ImageView blue = (ImageView) findViewById(R.id.imageview_blue);
-        //final ImageView green = (ImageView) findViewById(R.id.imageview_green);
-        //final ImageView red = (ImageView) findViewById(R.id.imageview_red);
-        //final ImageView yellow = (ImageView) findViewById(R.id.imageview_yellow);
+        final ImageView blue = (ImageView) findViewById(R.id.imageview_blue);
+        final ImageView green = (ImageView) findViewById(R.id.imageview_green);
+        final ImageView red = (ImageView) findViewById(R.id.imageview_red);
+        final ImageView yellow = (ImageView) findViewById(R.id.imageview_yellow);
         /*
         blue.setOnTouchListener(new View.OnTouchListener() {
             @Override
