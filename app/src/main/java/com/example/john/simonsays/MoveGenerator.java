@@ -6,12 +6,12 @@ import java.util.Random;
  * Created by JohnL on 3/9/2018.
  */
 
-public class moveGenerator {
+public class MoveGenerator {
     //This will generate a random number to select tokens
     public Random rand = new Random();
     String token;
 
-    public moveGenerator(){
+    public MoveGenerator(){
         token = "";
     }
     //add token adds a token to our string
