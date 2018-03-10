@@ -3,11 +3,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-        <item android:id="@+id/highscores"
+        <item android:id="@+id/highscores_activity"
         android:title="highscores"
          />
 
-        <item android:id="@+id/credits"
+        <item android:id="@+id/credits_activity"
             android:title="credits"
             />
 
