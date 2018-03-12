@@ -140,7 +140,8 @@ public class MainActivity extends AppCompatActivity {
         //==========================================================================================
         /*The following block sets the touch listeners to the imageviews so they behave like buttons
         * it sets a delay for the on touch events so they change sprites, play a noise and change back
-        * when you remove your finger*/
+        * when you remove your finger
+        * ==========================================================================================*/
         imageview_blue.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View arg0, MotionEvent arg1) {
