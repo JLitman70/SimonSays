@@ -25,29 +25,33 @@ public class MoveGenerator {
     String token;
     String alphabet;
     boolean isRandom;
-    public MoveGenerator(String mode){
-        if(mode.equals("easy")){
-            alphabet ="RG";
+    int current;
+
+    public MoveGenerator(String mode) {
+        if (mode.equals("easy")) {
+            alphabet = "RG";
             isRandom = false;
-        }else if(mode.equals("medium")){
-            alphabet ="RGB";
+        } else if (mode.equals("medium")) {
+            alphabet = "RGB";
             isRandom = false;
-        }else if(mode.equals("normal")){
-            alphabet ="RGBY";
+        } else if (mode.equals("normal")) {
+            alphabet = "RGBY";
             isRandom = false;
-        }else if(mode.equals("hard")){
-            alphabet ="RGBY";
+        } else if (mode.equals("hard")) {
+            alphabet = "RGBY";
             isRandom = true;
         }
         token = "";
+        current = 0;
     }
-    public void addToken(int length){
+
+    public void addToken(int length) {
         int index = rand.nextInt(alphabet.length());
-        if(isRandom){
-            length+=token.length();
+        if (isRandom) {
+            length += token.length();
             clearToken();
         }
-        for(int i=0;i<length;i++) {
+        for (int i = 0; i < length; i++) {
             if (index == 0) {
                 token += "R";
             } else if (index == 1) {
@@ -60,10 +64,17 @@ public class MoveGenerator {
             index = rand.nextInt(alphabet.length());
         }
     }
-    public void clearToken(){
+
+    public void clearToken() {
         token = "";
     }
-    //public boolean match(){return true;}
 
+    public boolean match(char currentChar) {
+        if (token.charAt(current) == currentChar) {
+            current++;
+            return true;
+        } else {
+            return false;
+        }
+    }
 }
-

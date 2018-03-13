@@ -39,13 +39,16 @@ public class MainActivity extends AppCompatActivity {
         final int beep_blue = sounds.load(this, R.raw.beep_blue,1);
         final int beep_green = sounds.load(this, R.raw.beep_green,1);
         final int beep_yellow = sounds.load(this, R.raw.beep_yellow,1);
+        final int beep_correct = sounds.load(this, R.raw.beep_correct,1);
+        final int beep_incorrect = sounds.load(this, R.raw.beep_incorrect,1);
         final ImageView imageview_blue = (ImageView) findViewById(R.id.imageview_blue);
         final ImageView imageview_green = (ImageView) findViewById(R.id.imageview_green);
         final ImageView imageview_red = (ImageView) findViewById(R.id.imageview_red);
         final ImageView imageview_yellow = (ImageView) findViewById(R.id.imageview_yellow);
-        final MoveGenerator gen = new MoveGenerator("normal");                                  // for testing, should be set by the intent from the sreen
+        final MoveGenerator gen = new MoveGenerator("hard");                                  // for testing, should be set by the intent from the sreen
         final TextView _testview = (TextView) findViewById(R.id.textview_moves);
         final Button button_hint = (Button) findViewById(R.id.button_test);
+
         //==========================================================================================
         /*Below is our thread object being created to demonstrate the pattern the user should push
         * the Thread automatically runs once, but lays dormant until the user invokes the button_hint
@@ -115,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         //==========================================================================================
         /*below are values being set and used for testing, as well as setting up the game*/
         //==========================================================================================
-        gen.addToken(5);
+        gen.addToken(1);
         _testview.setText(gen.token);
         button_hint.setEnabled(false);
         demo.run();
@@ -139,8 +142,9 @@ public class MainActivity extends AppCompatActivity {
         });
         //==========================================================================================
         /*The following block sets the touch listeners to the imageviews so they behave like buttons
-        * it sets a delay for the on touch events so they change sprites, play a noise and change back
-        * when you remove your finger*/
+        * the touch events let you change sprites, play a noise and change back when your finger is
+        * removed*/
+        //==========================================================================================
         imageview_blue.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View arg0, MotionEvent arg1) {
@@ -153,6 +157,24 @@ public class MainActivity extends AppCompatActivity {
                     }
                     case MotionEvent.ACTION_UP:{
                         imageview_blue.setImageResource(R.drawable.blue);
+
+                        if (gen.match('B')){
+                            if(gen.current==gen.token.length()){
+                                sounds.play(beep_correct, 1.0f, 1.0f, 1, 0, 1.0f);
+                                gen.addToken(1);
+                                button_hint.performClick();
+                                _testview.setText(gen.token);
+                                gen.current=0;
+                            }
+                        }else{
+                            //incorrect
+                            gen.current=0;
+                            gen.clearToken();
+                            sounds.play(beep_incorrect, 1.0f, 1.0f, 1, 0, 1.0f);
+                            gen.addToken(1);
+                            button_hint.performClick();
+                            _testview.setText(gen.token);
+                        }
                         break;
                     }
                 }
@@ -173,6 +195,24 @@ public class MainActivity extends AppCompatActivity {
                         }
                         case MotionEvent.ACTION_UP: {
                             imageview_green.setImageResource(R.drawable.green);
+
+                            if (gen.match('G')){
+                                if(gen.current==gen.token.length()) {
+                                    sounds.play(beep_correct, 1.0f, 1.0f, 1, 0, 1.0f);
+                                    gen.addToken(1);
+                                    button_hint.performClick();
+                                    _testview.setText(gen.token);
+                                    gen.current=0;
+                                }
+                            }else{
+                                //incorrect
+                                gen.current=0;
+                                gen.clearToken();
+                                sounds.play(beep_incorrect, 1.0f, 1.0f, 1, 0, 1.0f);
+                                gen.addToken(1);
+                                button_hint.performClick();
+                                _testview.setText(gen.token);
+                            }
                             break;
                         }
                     }
@@ -193,7 +233,23 @@ public class MainActivity extends AppCompatActivity {
                         }
                         case MotionEvent.ACTION_UP: {
                             imageview_red.setImageResource(R.drawable.red);
-
+                            if (gen.match('R')){
+                                if(gen.current==gen.token.length()) {
+                                    sounds.play(beep_correct, 1.0f, 1.0f, 1, 0, 1.0f);
+                                    gen.addToken(1);
+                                    button_hint.performClick();
+                                    _testview.setText(gen.token);
+                                    gen.current=0;
+                                }
+                            }else{
+                                //incorrect
+                                gen.current=0;
+                                gen.clearToken();
+                                sounds.play(beep_incorrect, 1.0f, 1.0f, 1, 0, 1.0f);
+                                gen.addToken(1);
+                                button_hint.performClick();
+                                _testview.setText(gen.token);
+                            }
                             break;
                         }
                     }
@@ -214,7 +270,23 @@ public class MainActivity extends AppCompatActivity {
                         }
                         case MotionEvent.ACTION_UP: {
                             imageview_yellow.setImageResource(R.drawable.yellow);
-
+                            if (gen.match('Y')){
+                                if(gen.current==gen.token.length()) {
+                                    sounds.play(beep_correct, 1.0f, 1.0f, 1, 0, 1.0f);
+                                    gen.addToken(1);
+                                    button_hint.performClick();
+                                    _testview.setText(gen.token);
+                                    gen.current=0;
+                                }
+                            }else{
+                                //incorrect
+                                gen.current=0;
+                                gen.clearToken();
+                                sounds.play(beep_incorrect, 1.0f, 1.0f, 1, 0, 1.0f);
+                                gen.addToken(1);
+                                button_hint.performClick();
+                                _testview.setText(gen.token);
+                            }
                             break;
                         }
                     }
