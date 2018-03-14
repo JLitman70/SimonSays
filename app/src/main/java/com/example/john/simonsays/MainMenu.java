@@ -14,7 +14,7 @@ import android.widget.Spinner;
 
 public class MainMenu extends AppCompatActivity implements View.OnClickListener {
 
-
+    private String gamemodeType;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +32,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                //String text = adapterView.getSelectedItem().toString();
                //Log.i("GAMEMODE", text);//testing value is appearing
 
-               //  = adapterView.getSelectedItem().toString();
+               gamemodeType = adapterView.getSelectedItem().toString();
 
             }
 
@@ -49,9 +49,10 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
-        //Intent gameIntent = new Intent(this,MainActivity.class);
-        //startActivity(gameIntent);
-        //!!!!!!!!!!!!!!!!CAUSES ERROR OPENING MAINACTIVITY!!!!!!!!!!!!!!
+        Intent gameIntent = new Intent(this,MainActivity.class);
+        gameIntent.putExtra("gamemode_type", gamemodeType);
+        startActivity(gameIntent);
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
