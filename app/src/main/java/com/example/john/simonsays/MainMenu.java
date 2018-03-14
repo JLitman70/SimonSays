@@ -14,21 +14,26 @@ import android.widget.Spinner;
 
 public class MainMenu extends AppCompatActivity implements View.OnClickListener {
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
-        //--------------------------------------second layout code start------------------------
+
         Button play = (Button)findViewById(R.id.play_button);
         play.setOnClickListener(this);
 
-        Spinner gamemode = findViewById(R.id.gamemode_dropdown);
+        final Spinner gamemode = findViewById(R.id.gamemode_dropdown);
         gamemode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                //String text = adapterView.getSelectedItem().toString();
-                //Log.i("GAMEMODE", text); testing value is appearing
+               //String text = adapterView.getSelectedItem().toString();
+               //Log.i("GAMEMODE", text);//testing value is appearing
+
+               //  = adapterView.getSelectedItem().toString();
+
             }
 
             @Override
@@ -44,7 +49,9 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
-
+        //Intent gameIntent = new Intent(this,MainActivity.class);
+        //startActivity(gameIntent);
+        //!!!!!!!!!!!!!!!!CAUSES ERROR OPENING MAINACTIVITY!!!!!!!!!!!!!!
     }
 
     public boolean onCreateOptionsMenu(Menu menu){
