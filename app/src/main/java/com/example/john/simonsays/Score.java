@@ -1,5 +1,7 @@
 package com.example.john.simonsays;
 
+import java.io.Serializable;
+
 /**
  * Created by JohnL on 3/14/2018.
  *
@@ -8,7 +10,7 @@ package com.example.john.simonsays;
  * .toString() will be overwritten to displaye to the HighScores ListView.
  */
 
-public class Score {
+public class Score implements Serializable {
     public String player;
     public int score;
 
@@ -16,7 +18,7 @@ public class Score {
         this.player = player;
         this.score = score;
     }
-    public Score() {}
+    public Score(){}
 
     public String toString(){
         return player + "\t\t\t" +score;

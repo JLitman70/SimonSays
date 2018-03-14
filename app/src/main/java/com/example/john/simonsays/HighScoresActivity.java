@@ -1,5 +1,6 @@
 package com.example.john.simonsays;
 
+import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +10,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.List;
 
 public class HighScoresActivity extends AppCompatActivity {
 
@@ -38,14 +46,31 @@ public class HighScoresActivity extends AppCompatActivity {
         Button button_easy = (Button) findViewById(R.id.button_easy);
         Button button_medium = (Button) findViewById(R.id.button_medium);
         Button button_hard = (Button) findViewById(R.id.button_hard);
-
-        //testing, adding a player to each list
-        HighScoreEasy.add(new Score("John",80));
-        HighScoreMedium.add(new Score("Sasha",15));
-        HighScoreHard.add(new Score("Daniel",5));
-        HighScoreOriginal.add(new Score("Dr. Nicholson",100));
+        String[] fileName ={"Simon(Original)","Simon(Easy","Simon(Medium)","Simon(Hard)"};
 
 
+        /*
+        The following block of code creates a file input stream and saves our current HighScoresOrignal
+        contents to it, needs to be done in the Game activity, then reloaded here*/
+        FileInputStream fis;
+        for(int i=0;i<fileName.length;i++) {
+            try {
+                fis = openFileInput(fileName[i]);
+                ObjectInputStream ois = new ObjectInputStream(fis);
+                switch(i) {
+                    case 0:  HighScoreOriginal.addAll((ArrayList<Score>) ois.readObject());
+                    case 1:  HighScoreEasy.addAll((ArrayList<Score>) ois.readObject());
+                    case 2:  HighScoreMedium.addAll((ArrayList<Score>) ois.readObject());
+                    case 3:  HighScoreHard.addAll((ArrayList<Score>) ois.readObject());
+                }
+                ois.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+
+        //the following are the Listeners for the buttons that select the high scores list to use
         button_easy.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {

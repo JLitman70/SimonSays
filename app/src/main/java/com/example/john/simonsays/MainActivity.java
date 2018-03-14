@@ -1,5 +1,6 @@
 package com.example.john.simonsays;
 
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.media.SoundPool;
 import android.os.Handler;
@@ -16,6 +17,11 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -119,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
         //==========================================================================================
         /*below are values being set and used for testing, as well as setting up the game*/
         //==========================================================================================
-        gen.addToken(5);
+        gen.addToken(1);
         _testview.setText(gen.token);
         button_hint.setEnabled(false);
         demo.run();
@@ -168,6 +174,30 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             }else{
                                 //incorrect
+                                Score curr = new Score("name",gen.token.length());
+                                ArrayList curr_list = new ArrayList<>();
+
+
+                                FileInputStream fis;
+                                try {
+                                    fis = openFileInput(getIntent().getStringExtra("gamemode_type"));
+                                    ObjectInputStream ois = new ObjectInputStream(fis);
+                                    curr_list.addAll((ArrayList<Score>) ois.readObject());
+                                    ois.close();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                curr_list.add(curr);
+                                FileOutputStream fos;
+                                try {
+                                    fos = openFileOutput(getIntent().getStringExtra("gamemode_type"), Context.MODE_PRIVATE);
+                                    ObjectOutputStream oos = new ObjectOutputStream(fos);
+                                    oos.reset();
+                                    oos.writeObject(curr_list);
+                                    oos.close();
+                                } catch(Exception e) {
+                                    e.printStackTrace();
+                                }
                                 gen.current=0;
                                 gen.clearToken();
                                 sounds.play(beep_incorrect, 1.0f, 1.0f, 1, 0, 1.0f);
@@ -205,6 +235,30 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             }else{
                                 //incorrect
+                                Score curr = new Score("name",gen.token.length());
+                                ArrayList curr_list = new ArrayList<>();
+
+
+                                FileInputStream fis;
+                                try {
+                                    fis = openFileInput(getIntent().getStringExtra("gamemode_type"));
+                                    ObjectInputStream ois = new ObjectInputStream(fis);
+                                    curr_list.addAll((ArrayList<Score>) ois.readObject());
+                                    ois.close();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                curr_list.add(curr);
+                                FileOutputStream fos;
+                                try {
+                                    fos = openFileOutput(getIntent().getStringExtra("gamemode_type"), Context.MODE_PRIVATE);
+                                    ObjectOutputStream oos = new ObjectOutputStream(fos);
+                                    oos.reset();
+                                    oos.writeObject(curr_list);
+                                    oos.close();
+                                } catch(Exception e) {
+                                    e.printStackTrace();
+                                }
                                 gen.current=0;
                                 gen.clearToken();
                                 sounds.play(beep_incorrect, 1.0f, 1.0f, 1, 0, 1.0f);
@@ -242,6 +296,30 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             }else{
                                 //incorrect
+                                Score curr = new Score("name",gen.token.length());
+                                ArrayList curr_list = new ArrayList<>();
+
+
+                                FileInputStream fis;
+                                try {
+                                    fis = openFileInput(getIntent().getStringExtra("gamemode_type"));
+                                    ObjectInputStream ois = new ObjectInputStream(fis);
+                                    curr_list.addAll((ArrayList<Score>) ois.readObject());
+                                    ois.close();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                curr_list.add(curr);
+                                FileOutputStream fos;
+                                try {
+                                    fos = openFileOutput(getIntent().getStringExtra("gamemode_type"), Context.MODE_PRIVATE);
+                                    ObjectOutputStream oos = new ObjectOutputStream(fos);
+                                    oos.reset();
+                                    oos.writeObject(curr_list);
+                                    oos.close();
+                                } catch(Exception e) {
+                                    e.printStackTrace();
+                                }
                                 gen.current=0;
                                 gen.clearToken();
                                 sounds.play(beep_incorrect, 1.0f, 1.0f, 1, 0, 1.0f);
@@ -278,6 +356,30 @@ public class MainActivity extends AppCompatActivity {
                                     gen.current = 0;
                                 }
                             } else {
+                                Score curr = new Score("name",gen.token.length());
+                                ArrayList curr_list = new ArrayList<>();
+
+
+                                FileInputStream fis;
+                                try {
+                                    fis = openFileInput(getIntent().getStringExtra("gamemode_type"));
+                                    ObjectInputStream ois = new ObjectInputStream(fis);
+                                    curr_list.addAll((ArrayList<Score>) ois.readObject());
+                                    ois.close();
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                                curr_list.add(curr);
+                                FileOutputStream fos;
+                                try {
+                                    fos = openFileOutput(getIntent().getStringExtra("gamemode_type"), Context.MODE_PRIVATE);
+                                    ObjectOutputStream oos = new ObjectOutputStream(fos);
+                                    oos.reset();
+                                    oos.writeObject(curr_list);
+                                    oos.close();
+                                } catch(Exception e) {
+                                    e.printStackTrace();
+                                }
                                 gen.current = 0;
                                 gen.clearToken();
                                 sounds.play(beep_incorrect, 1.0f, 1.0f, 1, 0, 1.0f);
