@@ -49,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
         final TextView _testview = (TextView) findViewById(R.id.textview_moves);
         final Button button_hint = (Button) findViewById(R.id.button_test);
 
-
         final MoveGenerator gen = new MoveGenerator(getIntent().getStringExtra("gamemode_type"));
         //==========================================================================================
         /*Below is our thread object being created to demonstrate the pattern the user should push
