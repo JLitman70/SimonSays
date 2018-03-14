@@ -4,9 +4,9 @@
 
     <string-array name="gamemodes">
         <item>Simon(Original)</item>
-        <item>Easy Simon</item>
-        <item>Hard Simon</item>
-        <item>Timed Simon</item>
+        <item>Simon(Easy)</item>
+        <item>Simon(Medium)</item>
+        <item>Simon(Hard)</item>
 
     </string-array>
 </resources>

@@ -28,16 +28,16 @@ public class MoveGenerator {
     int current;
 
     public MoveGenerator(String mode) {
-        if (mode.equals("easy")) {
+        if (mode.equals("Simon(Easy)")) {
             alphabet = "RG";
             isRandom = false;
-        } else if (mode.equals("medium")) {
+        } else if (mode.equals("Simon(Medium)")) {
             alphabet = "RGB";
             isRandom = false;
-        } else if (mode.equals("normal")) {
+        } else if (mode.equals("Simon(Original)")) {
             alphabet = "RGBY";
             isRandom = false;
-        } else if (mode.equals("hard")) {
+        } else if (mode.equals("Simon(Hard)")) {
             alphabet = "RGBY";
             isRandom = true;
         }
