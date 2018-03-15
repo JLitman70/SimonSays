@@ -2,6 +2,7 @@ package com.example.john.simonsays;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.media.Image;
 import android.media.SoundPool;
 import android.os.Handler;
 import android.os.Looper;
@@ -33,7 +34,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         /*The following block of code instantiates Widget objects linked to the widgets in the XML,
         * so we can manipulate them. These items are named as appropriately as possible
         */
@@ -150,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
         * it sets a delay for the on touch events so they change sprites, play a noise and change back
         * when you remove your finger
         * ==========================================================================================*/
+
         imageview_blue.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View arg0, MotionEvent arg1) {
