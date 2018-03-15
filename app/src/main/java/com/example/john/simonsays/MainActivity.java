@@ -27,7 +27,8 @@ import java.util.TimerTask;
 
 
 public class MainActivity extends AppCompatActivity {
-
+    int score = 0;
+    String name ="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         final TextView _testview = (TextView) findViewById(R.id.textview_moves);
         final Button button_hint = (Button) findViewById(R.id.button_test);
         final String playername = getIntent().getStringExtra("nameText"); //users name from main menu
+        name = playername;
         //==========================================================================================
         /*Below is our thread object being created to demonstrate the pattern the user should push
         * the Thread automatically runs once, but lays dormant until the user invokes the button_hint
@@ -169,10 +171,11 @@ public class MainActivity extends AppCompatActivity {
                                     button_hint.performClick();
                                     _testview.setText(gen.token);
                                     gen.current=0;
+                                    score++;
                                 }
                             }else{
                                 //incorrect
-                                Score curr = new Score("name",gen.token.length());
+                                Score curr = new Score(playername,gen.token.length());
                                 ArrayList curr_list = new ArrayList<>();
                                 FileInputStream fis;
                                 try {
@@ -200,6 +203,7 @@ public class MainActivity extends AppCompatActivity {
                                 gen.addToken(1);
                                 button_hint.performClick();
                                 _testview.setText(gen.token);
+                                score=0;
                             }
                             break;
                         }
@@ -228,10 +232,11 @@ public class MainActivity extends AppCompatActivity {
                                     button_hint.performClick();
                                     _testview.setText(gen.token);
                                     gen.current=0;
+                                    score++;
                                 }
                             }else{
                                 //incorrect
-                                Score curr = new Score("name",gen.token.length());
+                                Score curr = new Score(playername,gen.token.length());
                                 ArrayList curr_list = new ArrayList<>();
                                 FileInputStream fis;
                                 try {
@@ -259,6 +264,7 @@ public class MainActivity extends AppCompatActivity {
                                 gen.addToken(1);
                                 button_hint.performClick();
                                 _testview.setText(gen.token);
+                                score=0;
                             }
                             break;
                         }
@@ -287,10 +293,11 @@ public class MainActivity extends AppCompatActivity {
                                     button_hint.performClick();
                                     _testview.setText(gen.token);
                                     gen.current=0;
+                                    score++;
                                 }
                             }else{
                                 //incorrect
-                                Score curr = new Score("name",gen.token.length());
+                                Score curr = new Score(playername,gen.token.length());
                                 ArrayList curr_list = new ArrayList<>();
                                 FileInputStream fis;
                                 try {
@@ -318,6 +325,7 @@ public class MainActivity extends AppCompatActivity {
                                 gen.addToken(1);
                                 button_hint.performClick();
                                 _testview.setText(gen.token);
+                                score=0;
                             }
                             break;
                         }
@@ -346,9 +354,10 @@ public class MainActivity extends AppCompatActivity {
                                     button_hint.performClick();
                                     _testview.setText(gen.token);
                                     gen.current = 0;
+                                    score++;
                                 }
                             } else {
-                                Score curr = new Score("name",gen.token.length());
+                                Score curr = new Score(playername,gen.token.length());
                                 ArrayList curr_list = new ArrayList<>();
                                 FileInputStream fis;
                                 try {
@@ -376,6 +385,7 @@ public class MainActivity extends AppCompatActivity {
                                 gen.addToken(1);
                                 button_hint.performClick();
                                 _testview.setText(gen.token);
+                                score=0;
                             }
                             break;
                         }
@@ -385,5 +395,32 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+    @Override
+    public void onBackPressed() {
+
+        Score curr = new Score(name,score);
+        ArrayList curr_list = new ArrayList<>();
+        FileInputStream fis;
+        try {
+            fis = openFileInput(getIntent().getStringExtra("gamemode_type"));
+            ObjectInputStream ois = new ObjectInputStream(fis);
+            curr_list.addAll((ArrayList<Score>) ois.readObject());
+            ois.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        curr_list.add(curr);
+        FileOutputStream fos;
+        try {
+            fos = openFileOutput(getIntent().getStringExtra("gamemode_type"), Context.MODE_PRIVATE);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.reset();
+            oos.writeObject(curr_list);
+            oos.close();
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        super.onBackPressed();
     }
 }
