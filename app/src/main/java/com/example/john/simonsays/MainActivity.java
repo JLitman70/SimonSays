@@ -35,10 +35,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         /*The following block of code instantiates Widget objects linked to the widgets in the XML,
-        * so we can manipulate them. These are declared  'final' so they can be manipulated in the
-        * overridden functions we create for objects. These items are named as appropriately as possible
-        * with items starting with an '_' being coined "Test" items, that may be deleted when project is
-        * finished*/
+        * so we can manipulate them. These items are named as appropriately as possible
+        */
         //==========================================================================================
         final SoundPool.Builder soundbuilder = new SoundPool.Builder();
         final SoundPool sounds = soundbuilder.build();
@@ -53,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         final ImageView imageview_red = (ImageView) findViewById(R.id.imageview_red);
         final ImageView imageview_yellow = (ImageView) findViewById(R.id.imageview_yellow);
         final MoveGenerator gen = new MoveGenerator(getIntent().getStringExtra("gamemode_type"));
-        final TextView _testview = (TextView) findViewById(R.id.textview_moves);
+        //final TextView _testview = (TextView) findViewById(R.id.textview_moves);
         final Button button_hint = (Button) findViewById(R.id.button_test);
         final String playername = getIntent().getStringExtra("nameText"); //users name from main menu
         name = playername;
@@ -126,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
         /*below are values being set and used for testing, as well as setting up the game*/
         //==========================================================================================
         gen.addToken(1);
-        _testview.setText(gen.token);
+        //_testview.setText(gen.token);
         button_hint.setEnabled(false);
         demo.run();
         //==========================================================================================
@@ -169,40 +167,42 @@ public class MainActivity extends AppCompatActivity {
                                     sounds.play(beep_correct, 1.0f, 1.0f, 1, 0, 1.0f);
                                     gen.addToken(1);
                                     button_hint.performClick();
-                                    _testview.setText(gen.token);
+                                   // _testview.setText(gen.token);
                                     gen.current=0;
                                     score++;
                                 }
                             }else{
                                 //incorrect
-                                Score curr = new Score(playername,gen.token.length());
-                                ArrayList curr_list = new ArrayList<>();
-                                FileInputStream fis;
-                                try {
-                                    fis = openFileInput(getIntent().getStringExtra("gamemode_type"));
-                                    ObjectInputStream ois = new ObjectInputStream(fis);
-                                    curr_list.addAll((ArrayList<Score>) ois.readObject());
-                                    ois.close();
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                                curr_list.add(curr);
-                                FileOutputStream fos;
-                                try {
-                                    fos = openFileOutput(getIntent().getStringExtra("gamemode_type"), Context.MODE_PRIVATE);
-                                    ObjectOutputStream oos = new ObjectOutputStream(fos);
-                                    oos.reset();
-                                    oos.writeObject(curr_list);
-                                    oos.close();
-                                } catch(Exception e) {
-                                    e.printStackTrace();
+                                if(score!=0) {
+                                    Score curr = new Score(playername, gen.token.length() - 1);
+                                    ArrayList curr_list = new ArrayList<>();
+                                    FileInputStream fis;
+                                    try {
+                                        fis = openFileInput(getIntent().getStringExtra("gamemode_type"));
+                                        ObjectInputStream ois = new ObjectInputStream(fis);
+                                        curr_list.addAll((ArrayList<Score>) ois.readObject());
+                                        ois.close();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                    curr_list.add(curr);
+                                    FileOutputStream fos;
+                                    try {
+                                        fos = openFileOutput(getIntent().getStringExtra("gamemode_type"), Context.MODE_PRIVATE);
+                                        ObjectOutputStream oos = new ObjectOutputStream(fos);
+                                        oos.reset();
+                                        oos.writeObject(curr_list);
+                                        oos.close();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
                                 }
                                 gen.current=0;
                                 gen.clearToken();
                                 sounds.play(beep_incorrect, 1.0f, 1.0f, 1, 0, 1.0f);
                                 gen.addToken(1);
                                 button_hint.performClick();
-                                _testview.setText(gen.token);
+                                //_testview.setText(gen.token);
                                 score=0;
                             }
                             break;
@@ -230,40 +230,42 @@ public class MainActivity extends AppCompatActivity {
                                     sounds.play(beep_correct, 1.0f, 1.0f, 1, 0, 1.0f);
                                     gen.addToken(1);
                                     button_hint.performClick();
-                                    _testview.setText(gen.token);
+                                    //_testview.setText(gen.token);
                                     gen.current=0;
                                     score++;
                                 }
                             }else{
                                 //incorrect
-                                Score curr = new Score(playername,gen.token.length());
-                                ArrayList curr_list = new ArrayList<>();
-                                FileInputStream fis;
-                                try {
-                                    fis = openFileInput(getIntent().getStringExtra("gamemode_type"));
-                                    ObjectInputStream ois = new ObjectInputStream(fis);
-                                    curr_list.addAll((ArrayList<Score>) ois.readObject());
-                                    ois.close();
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                                curr_list.add(curr);
-                                FileOutputStream fos;
-                                try {
-                                    fos = openFileOutput(getIntent().getStringExtra("gamemode_type"), Context.MODE_PRIVATE);
-                                    ObjectOutputStream oos = new ObjectOutputStream(fos);
-                                    oos.reset();
-                                    oos.writeObject(curr_list);
-                                    oos.close();
-                                } catch(Exception e) {
-                                    e.printStackTrace();
+                                if(score!=0) {
+                                    Score curr = new Score(playername, gen.token.length() - 1);
+                                    ArrayList curr_list = new ArrayList<>();
+                                    FileInputStream fis;
+                                    try {
+                                        fis = openFileInput(getIntent().getStringExtra("gamemode_type"));
+                                        ObjectInputStream ois = new ObjectInputStream(fis);
+                                        curr_list.addAll((ArrayList<Score>) ois.readObject());
+                                        ois.close();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                    curr_list.add(curr);
+                                    FileOutputStream fos;
+                                    try {
+                                        fos = openFileOutput(getIntent().getStringExtra("gamemode_type"), Context.MODE_PRIVATE);
+                                        ObjectOutputStream oos = new ObjectOutputStream(fos);
+                                        oos.reset();
+                                        oos.writeObject(curr_list);
+                                        oos.close();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
                                 }
                                 gen.current=0;
                                 gen.clearToken();
                                 sounds.play(beep_incorrect, 1.0f, 1.0f, 1, 0, 1.0f);
                                 gen.addToken(1);
                                 button_hint.performClick();
-                                _testview.setText(gen.token);
+                                //_testview.setText(gen.token);
                                 score=0;
                             }
                             break;
@@ -291,13 +293,14 @@ public class MainActivity extends AppCompatActivity {
                                     sounds.play(beep_correct, 1.0f, 1.0f, 1, 0, 1.0f);
                                     gen.addToken(1);
                                     button_hint.performClick();
-                                    _testview.setText(gen.token);
+                                    //_testview.setText(gen.token);
                                     gen.current=0;
                                     score++;
                                 }
                             }else{
                                 //incorrect
-                                Score curr = new Score(playername,gen.token.length());
+                                if(score!=0){
+                                Score curr = new Score(playername,gen.token.length()-1);
                                 ArrayList curr_list = new ArrayList<>();
                                 FileInputStream fis;
                                 try {
@@ -318,13 +321,13 @@ public class MainActivity extends AppCompatActivity {
                                     oos.close();
                                 } catch(Exception e) {
                                     e.printStackTrace();
-                                }
+                                }}
                                 gen.current=0;
                                 gen.clearToken();
                                 sounds.play(beep_incorrect, 1.0f, 1.0f, 1, 0, 1.0f);
                                 gen.addToken(1);
                                 button_hint.performClick();
-                                _testview.setText(gen.token);
+                                //_testview.setText(gen.token);
                                 score=0;
                             }
                             break;
@@ -352,39 +355,41 @@ public class MainActivity extends AppCompatActivity {
                                     sounds.play(beep_correct, 1.0f, 1.0f, 1, 0, 1.0f);
                                     gen.addToken(1);
                                     button_hint.performClick();
-                                    _testview.setText(gen.token);
+                                    //_testview.setText(gen.token);
                                     gen.current = 0;
                                     score++;
                                 }
                             } else {
-                                Score curr = new Score(playername,gen.token.length());
-                                ArrayList curr_list = new ArrayList<>();
-                                FileInputStream fis;
-                                try {
-                                    fis = openFileInput(getIntent().getStringExtra("gamemode_type"));
-                                    ObjectInputStream ois = new ObjectInputStream(fis);
-                                    curr_list.addAll((ArrayList<Score>) ois.readObject());
-                                    ois.close();
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
-                                curr_list.add(curr);
-                                FileOutputStream fos;
-                                try {
-                                    fos = openFileOutput(getIntent().getStringExtra("gamemode_type"), Context.MODE_PRIVATE);
-                                    ObjectOutputStream oos = new ObjectOutputStream(fos);
-                                    oos.reset();
-                                    oos.writeObject(curr_list);
-                                    oos.close();
-                                } catch(Exception e) {
-                                    e.printStackTrace();
+                                if(score!=0) {
+                                    Score curr = new Score(playername, gen.token.length() - 1);
+                                    ArrayList curr_list = new ArrayList<>();
+                                    FileInputStream fis;
+                                    try {
+                                        fis = openFileInput(getIntent().getStringExtra("gamemode_type"));
+                                        ObjectInputStream ois = new ObjectInputStream(fis);
+                                        curr_list.addAll((ArrayList<Score>) ois.readObject());
+                                        ois.close();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
+                                    curr_list.add(curr);
+                                    FileOutputStream fos;
+                                    try {
+                                        fos = openFileOutput(getIntent().getStringExtra("gamemode_type"), Context.MODE_PRIVATE);
+                                        ObjectOutputStream oos = new ObjectOutputStream(fos);
+                                        oos.reset();
+                                        oos.writeObject(curr_list);
+                                        oos.close();
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
                                 }
                                 gen.current = 0;
                                 gen.clearToken();
                                 sounds.play(beep_incorrect, 1.0f, 1.0f, 1, 0, 1.0f);
                                 gen.addToken(1);
                                 button_hint.performClick();
-                                _testview.setText(gen.token);
+                                //_testview.setText(gen.token);
                                 score=0;
                             }
                             break;
@@ -398,7 +403,7 @@ public class MainActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-
+        if(score!=0){
         Score curr = new Score(name,score);
         ArrayList curr_list = new ArrayList<>();
         FileInputStream fis;
@@ -422,5 +427,6 @@ public class MainActivity extends AppCompatActivity {
             e.printStackTrace();
         }
         super.onBackPressed();
+    }
     }
 }

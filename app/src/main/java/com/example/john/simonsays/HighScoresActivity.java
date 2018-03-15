@@ -48,7 +48,7 @@ public class HighScoresActivity extends AppCompatActivity {
         Button button_easy = (Button) findViewById(R.id.button_easy);
         Button button_medium = (Button) findViewById(R.id.button_medium);
         Button button_hard = (Button) findViewById(R.id.button_hard);
-        String[] fileName ={"Simon(Original)","Simon(Easy","Simon(Medium)","Simon(Hard)"};
+        String[] fileName ={"Simon(Original)","Simon(Easy)","Simon(Medium)","Simon(Hard)"};
 
 
         /*
