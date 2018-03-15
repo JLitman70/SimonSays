@@ -51,11 +51,9 @@ public class MainActivity extends AppCompatActivity {
         final ImageView imageview_green = (ImageView) findViewById(R.id.imageview_green);
         final ImageView imageview_red = (ImageView) findViewById(R.id.imageview_red);
         final ImageView imageview_yellow = (ImageView) findViewById(R.id.imageview_yellow);
-        //final MoveGenerator gen = new MoveGenerator("Simon(Original)");                                  // for testing, should be set by the intent from the sreen
+        final MoveGenerator gen = new MoveGenerator(getIntent().getStringExtra("gamemode_type"));
         final TextView _testview = (TextView) findViewById(R.id.textview_moves);
         final Button button_hint = (Button) findViewById(R.id.button_test);
-
-        final MoveGenerator gen = new MoveGenerator(getIntent().getStringExtra("gamemode_type"));
         //==========================================================================================
         /*Below is our thread object being created to demonstrate the pattern the user should push
         * the Thread automatically runs once, but lays dormant until the user invokes the button_hint
@@ -64,7 +62,6 @@ public class MainActivity extends AppCompatActivity {
         final Thread demo = new Thread() {
             @Override
             public void run() {
-                final Timer time = new Timer();
                 int timehelp = 0;
                 for (int i = 0; i < gen.token.length(); i++) {
                     timehelp = i;
@@ -176,8 +173,6 @@ public class MainActivity extends AppCompatActivity {
                                 //incorrect
                                 Score curr = new Score("name",gen.token.length());
                                 ArrayList curr_list = new ArrayList<>();
-
-
                                 FileInputStream fis;
                                 try {
                                     fis = openFileInput(getIntent().getStringExtra("gamemode_type"));
@@ -237,8 +232,6 @@ public class MainActivity extends AppCompatActivity {
                                 //incorrect
                                 Score curr = new Score("name",gen.token.length());
                                 ArrayList curr_list = new ArrayList<>();
-
-
                                 FileInputStream fis;
                                 try {
                                     fis = openFileInput(getIntent().getStringExtra("gamemode_type"));
@@ -298,8 +291,6 @@ public class MainActivity extends AppCompatActivity {
                                 //incorrect
                                 Score curr = new Score("name",gen.token.length());
                                 ArrayList curr_list = new ArrayList<>();
-
-
                                 FileInputStream fis;
                                 try {
                                     fis = openFileInput(getIntent().getStringExtra("gamemode_type"));
@@ -358,8 +349,6 @@ public class MainActivity extends AppCompatActivity {
                             } else {
                                 Score curr = new Score("name",gen.token.length());
                                 ArrayList curr_list = new ArrayList<>();
-
-
                                 FileInputStream fis;
                                 try {
                                     fis = openFileInput(getIntent().getStringExtra("gamemode_type"));
