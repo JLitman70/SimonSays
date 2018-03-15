@@ -17,6 +17,8 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 public class HighScoresActivity extends AppCompatActivity {
@@ -68,6 +70,19 @@ public class HighScoresActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+         Comparator<Score> sc = new Comparator<Score>() {
+            @Override
+            public int compare(Score s1, Score s2)
+            {
+                if (s1.score>s2.score){return -1;}
+                else{return 1;}
+
+            }
+        };
+        Collections.sort(HighScoreOriginal, sc);
+        Collections.sort(HighScoreEasy, sc);
+        Collections.sort(HighScoreMedium, sc);
+        Collections.sort(HighScoreHard, sc);
 
 
         //the following are the Listeners for the buttons that select the high scores list to use
