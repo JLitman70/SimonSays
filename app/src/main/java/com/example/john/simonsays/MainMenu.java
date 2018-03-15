@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 public class MainMenu extends AppCompatActivity implements View.OnClickListener {
@@ -25,6 +26,8 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
         Button play = (Button)findViewById(R.id.play_button);
         play.setOnClickListener(this);
 
+
+
         final Spinner gamemode = findViewById(R.id.gamemode_dropdown);
         gamemode.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -33,6 +36,7 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
                //Log.i("GAMEMODE", text);//testing value is appearing
 
                gamemodeType = adapterView.getSelectedItem().toString();
+
 
             }
 
@@ -50,7 +54,19 @@ public class MainMenu extends AppCompatActivity implements View.OnClickListener 
     @Override
     public void onClick(View view) {
         Intent gameIntent = new Intent(this,MainActivity.class);
+        EditText nameEdit = findViewById(R.id.name_editText);
+        String nameString;
+
+        if(nameEdit.getText().toString().trim().length() == 0){
+            nameString = "DEFAULT_USER"; //default if left empty or filled with spaces
+        }
+        else
+            nameString = nameEdit.getText().toString();
+
+        Log.i("NAME", nameString); //testing if empty
+
         gameIntent.putExtra("gamemode_type", gamemodeType);
+        gameIntent.putExtra("nameText", nameString);
         startActivity(gameIntent);
 
     }

@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         final MoveGenerator gen = new MoveGenerator(getIntent().getStringExtra("gamemode_type"));
         final TextView _testview = (TextView) findViewById(R.id.textview_moves);
         final Button button_hint = (Button) findViewById(R.id.button_test);
+        final String playername = getIntent().getStringExtra("nameText"); //users name from main menu
         //==========================================================================================
         /*Below is our thread object being created to demonstrate the pattern the user should push
         * the Thread automatically runs once, but lays dormant until the user invokes the button_hint
